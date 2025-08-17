@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rock-paper-scissor</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        text-align: center;
+         background-color: aqua;
+    }
+    .choice{
+        height: 130px;
+        width: 130px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        object-fit: cover;
+        border-radius:  50%;
+    }
+    #pp{
+        border-radius: 7rem;
+        object-fit: cover;
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #pp:hover{
+       cursor: pointer;
+         background-color: rgb(240, 97, 14) ;
+         border-radius: 50px;
+    }
+    #scissor:hover{
+         background-color: rgb(240, 97, 14) ;
+        outline: none;
+    }
+
+     .rr{
+         height: 130px;
+        width: 130px;
+        object-fit: cover;
+        border-radius: 50%;
+    } 
+    .choices{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        gap: 60px;
+        margin-top: 50px;
+        
+        
+    }
+    .para{
+        height: 50px;
+        margin: 80px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+    }
+   
+    #bb{
+        
+        background-color: blue;
+        color: white;
+        font-weight: 900;
+        display: inline-block;
+       align-items: center;
+        text-align: center;
+        font-size: 2rem;
+        border-radius: 20px;
+        padding: 20px;
+    }
+
+    #myBtn{
+        background-color: red;
+        color: white;
+        display: inline-block;
+        justify-content: center;
+        align-items: center;
+        margin: 50px;
+        padding: 10px;
+        border-radius: 20px;
+        font-size: 1rem;
+        font-weight: bolder;
+        border: none;
+    }
+   
+</style>
+<body>
+    <h1 style = "margin-top: 30px;">ROCK  - PAPER  - SCISSOR</h1>
+    <div class="choices">
+    <div class="choice" id = "rock">
+        <img class = "rr" id = "pp" src = https://nehalhazem.github.io/rockPaperScissors.io/img/rock.png>
+    </div>
+    <div class="choice" id="paper">
+        <img  id = "pp" src =https://sihoonathan.github.io/rock-paper-scissors/assets/img/paper.png>
+    </div>
+    <div class="choice" id="scissor">
+        <img  id = "pp" src =https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdmu4yxjuerhA4yPoIKpgfqGy3XsYVmhcKpM74YLYWeDp_kdwGpYh2OEdT3krwh3lDsso&usqp=CAU>
+    </div>
+    </div> 
+    <div class="para">
+        <p   id ="userscore"> My-score : 0</p>
+        <p id ="compscore"> Comp-score : 0</p>
+    </div>
+<p id = "bb" id = "nn">play the game</p>
+<div id="container"></div>
+<script>
+    let userScore = 0;
+    let compScore = 0;
+
+    const choices = document.querySelectorAll(".choice");
+    const part = document.querySelector("#bb");
+    const para = document.querySelector(".para");
+    const user = document.querySelector("#userscore");
+    const lap = document.querySelector("#compscore");
+
+
+const compMove = () =>{
+    let option = [ "rock","paper","scissor"];
+   const rIdx =  Math.floor(Math.random() * 3);
+   return option[rIdx];  
+}
+
+    choices.forEach((choice) => {
+        
+        choice.addEventListener("click" , () =>{
+            const choiceId = choice.getAttribute("id");
+             console.log("button was clicked",choiceId );
+             const gencompMove = compMove();
+    console.log("coms choice",gencompMove);
+            
+            
+            if(choiceId === gencompMove){
+                console.log("draw");
+                part.innerText = "DRAW!!";
+               
+            }
+            else if(
+                (choiceId === "rock" && gencompMove === "scicssor")  ||
+                  (choiceId === "paper" && gencompMove === "rock") ||
+                  (choiceId === "scicssor" && gencompMove === "paper")
+                  ){
+                    console.log("YOU WIN!");
+                    part.innerText = "YOU WIN!";
+                    userScore++;
+                  }else{
+                    console.log("YOU lost");
+                    part.innerText = "YOU LOSE";
+                    compScore++;
+                  }
+
+
+                document.getElementById("userscore").innerText = `My-score :${userScore}`;
+                document.getElementById("compscore").innerText = `comp-score :${compScore}`;
+                  
+           
+        })
+    })
+
+     let resBtn = document.createElement("button");
+    resBtn.innerText = "RESET";
+    resBtn.id = "myBtn";
+    resBtn.onclick =  function() {
+        userScore = 0;
+        compScore = 0;
+        document.getElementById("userscore").innerText = "My-score : " + userScore;
+        document.getElementById("compscore").innerText = "Comp-score : " + compScore;
+        
+    }
+    document.getElementById("container").appendChild(resBtn);
+    
+</script>
+   
+</body>
+</html>
